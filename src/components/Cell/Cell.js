@@ -2,22 +2,19 @@ import React from 'react'
 import './Cell.css'
 
 class Cell extends React.Component {
+	constructor(props) {
+		super(props);
+		this.showValue = this.showValue.bind(this);
+	}
+
+	showValue(event) {
+		console.log(event.target.innerText)
+		this.props.handler(event.target.innerText);
+		event.target.style.color = 'black';
+	}
+
 	render() {
-
-		function getKey(str){
-      let key = 0;
-      for (let i = 0; i < str.length; i++) {
-        key += str.charCodeAt(i);
-      }
-      return key.toString();
-    }
-
-		const nums = this.props.nums;
-    const items = nums.map((num) => {
-    	const key = getKey(num)
-    	return <div className="cell" key={key}>{num}</div>
-    });
-		return items
+		return <div className="cell" onClick={this.showValue}>{this.props.value}</div>;
 	}
 }
 
